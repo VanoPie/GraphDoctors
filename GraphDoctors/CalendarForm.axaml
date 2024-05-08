@@ -1,0 +1,54 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="850"
+        x:Class="GraphDoctors.CalendarForm"
+        Width="1000"
+        Height="650"
+        WindowStartupLocation="CenterScreen"
+        Title="Список дежурств">
+    <Grid>
+        <StackPanel Orientation="Vertical" x:CompileBindings="False">
+            <StackPanel Orientation="Horizontal">
+                <Calendar x:Name="Calendar" Margin="20 10 0 10 "/>
+                <StackPanel Orientation="Vertical">
+                    <Button Name="AddButton" Margin="10" VerticalAlignment="Top" Click="AddButton_Click">Добавить дежурство</Button>
+                    <Button Name="EditButton" Margin="10" VerticalAlignment="Top" Click="EditButton_OnClick">Изменить дежурство</Button>
+                    <Button Name="DeleteButton" Margin="10" VerticalAlignment="Top" Click="DeleteData_Click">Удалить дежурство</Button>
+                    <Button Name="DocumentButton" Margin="10" VerticalAlignment="Top" Click="DocumentButton_OnClick">Отчет за текущий месяц</Button>
+                    <Button Name="ExitButton" Margin="10 110 10 10" Click="ExitButton_OnClick">Выход из приложения</Button>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin = "15 15 0 0"> Поиск всех дежурств по врачу: </TextBlock>
+                    <TextBox Name="Search_Doctor" VerticalAlignment="Top" Width="200" Height="5" Margin ="22 10 0 0" TextChanged="SearchDoc"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center"
+                               x:Name="TitleSearch" Margin ="15 10 0 0">Фильтрация дежурств по отделу: </TextBlock>
+                    <ComboBox Name="CmbOtdelen" 
+                              x:CompileBindings="False"
+                               Width="200" Margin ="10 10 0 0" SelectionChanged="OtdFilter_OnClick">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Название_отделения}"></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    
+                </StackPanel>
+            </StackPanel>
+            </StackPanel>
+            <TextBlock Name="Comment" Margin="20 15 5 10">Дежурные в этот день: </TextBlock>
+                <DataGrid x:Name="DataGrid" IsReadOnly="true" x:CompileBindings="False" ItemsSource="{Binding}" Margin="20 0 0 0" Height="400">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID_дежурства" Binding="{Binding ID_дежурства}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Врач" Binding="{Binding ID_врача}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Отделение" Binding="{Binding Отделение}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Дата дежурства" Binding="{Binding Дата_дежурства}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+        </StackPanel>
+    </Grid>
+</Window>
